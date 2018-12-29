@@ -1,0 +1,22 @@
+﻿<hibernate-mapping assembly="CongTTDT_v1" namespace="CongTTDT_v1.App_Code.ORM.Model" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="CKTD_DVC_TienTrinh" table="CKTD_DVC_TienTrinh" lazy="true" >
+    <id name="ID" column="ID">
+      <generator class="identity" />
+    </id>
+    <property name="TenTienTrinh">
+      <column name="TenTienTrinh" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="ThoiGian">
+      <column name="ThoiGian" sql-type="nchar" not-null="false" />
+    </property>
+    <property name="TrangThai">
+      <column name="TrangThai" sql-type="int" not-null="false" />
+    </property>
+    <property name="CSDL_DichVuCong">
+      <column name="CSDL_DichVuCong" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="LenhTruyVan">
+      <column name="LenhTruyVan" sql-type="nvarchar" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

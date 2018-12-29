@@ -1,0 +1,37 @@
+﻿<hibernate-mapping assembly="CongTTDT_v1" namespace="CongTTDT_v1.App_Code.ORM.Model" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="CKTD_CP_DVC" table="CKTD_CP_DVC" lazy="true" >
+    <id name="ID" column="ID">
+      <generator class="identity" />
+    </id>
+    <property name="TuNgay">
+      <column name="TuNgay" sql-type="date" not-null="true" />
+    </property>
+    <property name="DenNgay">
+      <column name="DenNgay" sql-type="date" not-null="true" />
+    </property>
+    <property name="ThoiGianCapNhat">
+      <column name="ThoiGianCapNhat" sql-type="datetime" not-null="true" />
+    </property>
+    <property name="TongSoDVCTiepNhan">
+      <column name="TongSoDVCTiepNhan" sql-type="int" not-null="true" />
+    </property>
+    <property name="TongSoDVCDaXuLy">
+      <column name="TongSoDVCDaXuLy" sql-type="int" not-null="true" />
+    </property>
+    <property name="TongSoDVCXuLyDungHan">
+      <column name="TongSoDVCXuLyDungHan" sql-type="int" not-null="true" />
+    </property>
+    <property name="MoTa">
+      <column name="MoTa" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="TyLeDungHan">
+      <column name="TyLeDungHan" sql-type="float" not-null="false" />
+    </property>
+    <property name="TrangThai">
+      <column name="TrangThai" sql-type="int" not-null="false" />
+    </property>
+    <property name="ChuThich">
+      <column name="ChuThich" sql-type="nvarchar" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>
