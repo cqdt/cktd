@@ -1,0 +1,161 @@
+SET ANSI_NULLS ON
+GO
+
+CREATE TABLE [dbo].[CKTD_DonVi](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TenDonVi] [nvarchar](50) NULL,
+	[LoaiDonVi] [int] NULL,
+	[TrangThai] [int] NULL,
+	[STT] [int] NULL,
+	[DiaChi] [nvarchar](150) NULL,
+	[Email] [nvarchar](50) NULL,
+	[DienThoai] [nvarchar](50) NULL,
+	[Fax] [nvarchar](50) NULL,
+ CONSTRAINT [PK_CKTD_DonVi] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[CKTD_TaiKhoan](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TaiKhoan] [nvarchar](50) NULL,
+	[MatKhau] [nvarchar](50) NULL,
+	[TrangThai] [int] NULL,
+	[Ten] [nvarchar](150) NULL,
+	[DonVi_ID] [int] NULL,
+ CONSTRAINT [PK_Sys_User] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[CKTD_TaiKhoan]  WITH CHECK ADD  CONSTRAINT [FK_TaiKhoan_DonViChuQuan] FOREIGN KEY([DonVi_ID])
+REFERENCES [dbo].[CKTD_DonVi] ([Id])
+GO
+
+ALTER TABLE [dbo].[CKTD_TaiKhoan] CHECK CONSTRAINT [FK_TaiKhoan_DonViChuQuan]
+GO
+
+CREATE TABLE [dbo].[CKTD_DVC_DanhSach](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TenDichVu] [nvarchar](150) NULL,
+	[LoaiDichVu] [int] NULL,
+	[DonViChuQuan_ID] [int] NULL,
+	[MoTa] [nvarchar](1000) NULL,
+	[TrangThai] [int] NULL,
+ CONSTRAINT [PK_CKTD__DVC_DanhSach] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[CKTD_DVC_DanhSach]  WITH CHECK ADD  CONSTRAINT [FK_CKTD__DVC_DanhSach_CKTD_DonVi] FOREIGN KEY([DonViChuQuan_ID])
+REFERENCES [dbo].[CKTD_DonVi] ([Id])
+GO
+
+ALTER TABLE [dbo].[CKTD_DVC_DanhSach] CHECK CONSTRAINT [FK_CKTD__DVC_DanhSach_CKTD_DonVi]
+GO
+
+CREATE TABLE [dbo].[CKTD_DichVuCong](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TuNgay] [date] NULL,
+	[DenNgay] [date] NULL,
+	[MoTa] [nvarchar](1000) NULL,
+	[TrangThai] [int] NULL,
+	[ThoiGianCapNhat] [datetime] NULL,
+	[DonViCapNhat_ID] [int] NULL,
+	[TongSoDVCTiepNhan] [int] NULL,
+	[TongSoDVCDaXuLy] [int] NULL,
+	[TongSoDVCXuLyDungHan] [int] NULL,
+	[TyLeDungHan] [float] NULL,
+	[CongThucTinh] [int] NULL,
+	[LoaiDichVuCong] [int] NULL,
+ CONSTRAINT [PK_CKTD_DichVuCong] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[CKTD_DichVuCong]  WITH CHECK ADD  CONSTRAINT [FK_CKTD_DichVuCong_CKTD_DonVi] FOREIGN KEY([DonViCapNhat_ID])
+REFERENCES [dbo].[CKTD_DonVi] ([Id])
+GO
+
+ALTER TABLE [dbo].[CKTD_DichVuCong] CHECK CONSTRAINT [FK_CKTD_DichVuCong_CKTD_DonVi]
+GO
+
+CREATE TABLE [dbo].[CKTD_CP_DVC](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TuNgay] [date] NOT NULL,
+	[DenNgay] [date] NOT NULL,
+	[ThoiGianCapNhat] [date] NOT NULL,
+	[TongSoDVCTiepNhan] [int] NOT NULL,
+	[TongSoDVCDaXuLy] [int] NOT NULL,
+	[TongSoDVCXuLyDungHan] [int] NOT NULL,
+	[MoTa] [nvarchar](1000) NULL,
+	[TyLeDungHan] [float] NULL,
+	[ChuThich] [nvarchar](150) NULL,
+	[TrangThai] [int] NULL,
+ CONSTRAINT [PK_CKTD_CP_DVC] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[CKTD_CP_VanBan](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TuNgay] [date] NOT NULL,
+	[DenNgay] [date] NOT NULL,
+	[ThoiGianCapNhat] [datetime] NOT NULL,
+	[TongSoVanBan] [int] NOT NULL,
+	[TrangThai] [int] NULL,
+	[MoTa] [nvarchar](1000) NULL,
+	[ChuThich] [nvarchar](150) NULL,
+ CONSTRAINT [PK_CKTD_CP_VanBan] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[CKTD_DVC_TienTrinh](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TenTienTrinh] [nvarchar](150) NULL,
+	[ThoiGian] [nchar](10) NULL,
+	[TrangThai] [int] NULL,
+	[CSDL_DichVuCong] [nvarchar](150) NULL,
+	[LenhTruyVan] [nvarchar](250) NULL,
+ CONSTRAINT [PK_CKTD_DVC_TienTrinh] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[CKTD_VanBan_TienTrinh](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TenTienTrinh] [nvarchar](150) NULL,
+	[ThoiGian] [nchar](10) NULL,
+	[TrangThai] [int] NULL,
+	[CSDL_VanBan] [nvarchar](150) NULL,
+	[LenhTruyVan] [nvarchar](250) NULL,
+ CONSTRAINT [PK_CKTD_VanBan_TienTrinh] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
